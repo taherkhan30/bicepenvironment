@@ -1,0 +1,131 @@
+// Docs 
+// https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/
+
+// produce arm template 
+// az bicep build --file main.bicep 
+
+// az bicep decompile --file main.json
+
+// az group create --location westeurope --name bicep-course 
+
+// deploy 
+
+az deployment group create --subscription Pay-As-You-Go --resource-group bicep-course --template-file main.bicep --mode complete --name deployment  --parameters @main-keyvault.parameters.json --what-if
+
+// preview changes 
+
+--what-if 
+
+// use paramters on main 
+
+// --paramters storageaccountname='auditaccount' storageaccountname='auditaccount2'
+
+
+// ####### DATA TYPES #########
+
+
+// ####### STRINGS #########
+var myFirstString ''
+strings have single quotes 
+
+// ####### INTEGER #########
+var myFirstInt = 10 
+
+
+// ####### ARRAYS #########
+var myFirst Array = [
+    'myFirstString'
+    'mySecondString'
+    10
+    true
+] 
+
+// arrays 
+// mix arrays allowed 
+// no comma needed
+
+// CALL ARRAY
+var myFirstArray - myArray[0]
+
+// ####### OBJECTS #########
+var myFirstObject = {
+    myfirstkey: ''
+    mysecondkey: true
+}
+
+// can be any key data wise
+
+
+// CALL OBJECT 
+var myObjectVlue = myFirstObject.myFirstKey
+
+####### NESTED OBJECTS #########
+var myFirstObject = {
+    seconddObject: {
+        thirdObject: {
+            
+        }
+    }
+}
+
+/// string interpolation 
+var myfirststring = 'mystring${storageAccountName}'
+
+// stirng manipulation 
+var lowercase =toLower (myFirstString)
+var uppercase =toLower (myFirstString)
+var trimmed = trim(' spaces ')
+var sub = substring(trimmed, 0, 2)
+
+// data conversion 
+
+var myBool = bool('true')
+var myInt = int('10') convert string to int
+var mystring = string(10)
+
+var myarray = [
+    'mystring'
+    'mytherstring'
+]
+
+combine arrays 
+var secondmyarray = [
+    'mystring'
+    'mytherstring'
+]
+
+var firstelement = first(myarray)
+var arraycontains = contains(myAray, 'mmystring')
+var isArrayEmpty = empty(myArray) 
+
+join stings to together 
+var splitString = split('header1,header2,header3', ',')
+
+var combinedArray = concat(myArray, mySecondArray)
+var unionArray = union(myArray, mySecondArray)
+
+union does not include duplicate values 
+
+// scope functions 
+
+var resourcegroupName = resourcegroup().name
+var subid = subscription().id 
+
+var storageAccount1 = storageAccount.listKeys().keys[0]
+
+// load external files 
+
+var loadedjson = loadjsoncontent('example.json')
+var jsoncontent = loadedjson.storageAccount[0].name
+
+var loadedyamlcontent = loadyamlcontent('exmaple.yml')
+var yamlcontent = loadedyaml.name 
+
+
+Links 
+Depends on / Wait for another resource 
+https://github.com/Azure/bicep/discussions/6532 
+
+https://stackoverflow.com/questions/74766683/can-we-add-waiting-delay-in-azure-bicep-deployment
+
+

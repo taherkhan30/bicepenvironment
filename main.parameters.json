@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "tags": {
+      "value":{
+        "owner": "Taher Khan",
+        "env": "dev"
+      }
+    },
+    "storageAccountName": {
+      "value": "stbicepdev543643"
+    },
+    "auditstorageAccountName": {
+      "value": "stsuditbicepdev64364"
+    },
+    "storageAccountSku": {
+      "value":"Standard_LRS"
+  }
+}
+}

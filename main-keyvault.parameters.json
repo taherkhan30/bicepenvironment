@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "keyVaultName": {
+      "value": "bicepcourseKVfabric"
+    },
+    "applicationId": {
+      "value": ""
+    },
+    "objectId": {
+      "value": "0ed4e6cc-4fca-4bce-b9b6-2a354a00fbbb"
+    }
+  }
+}
