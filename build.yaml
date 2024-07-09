@@ -16,15 +16,15 @@ jobs:
         azureResourceManagerConnection: 'dev'
         subscriptionId: 'aa07614d-2c55-4e18-84ca-108abaaa6fcd'
         action: 'Create Or Update Resource Group'
-        resourceGroupName: 'rguksoocndev001'
+        resourceGroupName: 'bicep-course'
         location: 'UK South'
         templateLocation: 'Linked artifact'
         csmFile: 'main.bicep'
         csmParametersFile: 'main.parameters.json'
         deploymentMode: 'Validation'
 
-  - job: deploy_infra
-    displayName: 'Deploy Infra'
+  - job: deploy_infra_nonprod
+    displayName: 'Deploy Infra Non_prod'
     dependsOn: validate_infra
     steps:
     - task: AzureResourceManagerTemplateDeployment@3
@@ -34,7 +34,7 @@ jobs:
         azureResourceManagerConnection: 'dev'
         subscriptionId: 'aa07614d-2c55-4e18-84ca-108abaaa6fcd'
         action: 'Create Or Update Resource Group'
-        resourceGroupName: 'rguksoocndev001'
+        resourceGroupName: 'bicep-course'
         location: 'UK South'
         templateLocation: 'Linked artifact'
         csmFile: 'main.bicep'
