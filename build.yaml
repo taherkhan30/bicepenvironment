@@ -1,0 +1,42 @@
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: validate_infra
+    displayName: 'Validate Infra'
+    steps:
+    - task: AzureResourceManagerTemplateDeployment@3
+      displayName: 'Validate main.bicep'
+      
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'dev'
+        subscriptionId: 'aa07614d-2c55-4e18-84ca-108abaaa6fcd'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'rguksoocndev001'
+        location: 'UK South'
+        templateLocation: 'Linked artifact'
+        csmFile: 'main.bicep'
+        csmParametersFile: 'main.parameters.json'
+        deploymentMode: 'Validation'
+
+  - job: deploy_infra
+    displayName: 'Deploy Infra'
+    dependsOn: validate_infra
+    steps:
+    - task: AzureResourceManagerTemplateDeployment@3
+      displayName: 'Deploy main.bicep'
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'dev'
+        subscriptionId: 'aa07614d-2c55-4e18-84ca-108abaaa6fcd'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'rguksoocndev001'
+        location: 'UK South'
+        templateLocation: 'Linked artifact'
+        csmFile: 'main.bicep'
+        csmParametersFile: 'main.parameters.json'
+        deploymentMode: 'Incremental'
