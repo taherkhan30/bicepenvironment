@@ -36,6 +36,11 @@ module storageAccount 'modules/storage-account.bicep' = {
   }
 }
 
+var auditStorageAccountContainers = [
+  'data'
+  'logs'
+]
+
 module auditstorageAccount 'modules/storage-account.bicep' = {
   name: 'deploy-${auditstorageAccountName}'
   params: {
@@ -43,6 +48,7 @@ module auditstorageAccount 'modules/storage-account.bicep' = {
     tags: tags
     storageAccountName: storageAccountName
     storageAccountSku: storageAccountSku
+    containerNames: auditStorageAccountContainers
   }
 }
 

@@ -1,5 +1,5 @@
-@description('Specifies the name of the key vault.')
-param keyVaultName string
+// @description('Specifies the name of the key vault.')
+// param keyVaultName string
 
 @ description('Specifies the Azure location where the key vault should be created.')
 param location string =resourceGroup().location
@@ -16,10 +16,12 @@ param enabledForTemplateDeployment bool = false
 @description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
 param tenantId string
 
-param applicationId string 
+// param applicationId string 
 
 param objectId string 
 
+@description('names of keyvaults to delploy')
+param keyvaultNames array = []
 
 @description('Specifies whether the key vault is a standard vault or a premium vault.')
 @allowed([
@@ -39,8 +41,8 @@ var keyVaultAccessPolicies = {
   tenantId: tenantId
 }
 
-resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: keyVaultName
+resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = [for keyvaultName in keyvaultNames: {
+  name: keyvaultName
   location: location
   properties: {
     accessPolicies: [keyVaultAccessPolicies]
@@ -59,10 +61,10 @@ resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = {
       bypass: 'AzureServices'
     }
   }
-}
+}]
 
 
 output location string = location
-output name string = kv.name
+// output name string =
 output resourceGroupName string = resourceGroup().name
-output resourceId string = kv.id
+// output resourceId string = kv

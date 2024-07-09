@@ -1,4 +1,4 @@
- @description('Specifies the name of the key vault.')
+@description('Specifies the name of the key vault.')
 param keyVaultName string
 
 @description('Specifies the Azure location where the key vault should be created.')
@@ -11,22 +11,26 @@ param applicationId string
 
 param objectId string 
 
-
+var keyvaultNames = [
+  'keyvault10574306730333'
+  'keyvault27074209536584'
+]
 
 module keyvault 'modules/keyvault.bicep' = {
   name: 'deploy-${keyVaultName}'
   params: {
-    keyVaultName: keyVaultName
+    // keyVaultName: keyVaultName
     location: location
     tenantId: tenantId
     objectId: objectId
-    applicationId: applicationId
+    // applicationId: applicationId
+    keyvaultNames: keyvaultNames
 
   }
 }
 
 
 output location string = location
-output name string = keyvault.outputs.name
+// output name string = keyvault.outputs.name
 output resourceGroupName string = resourceGroup().name
-output resourceId string = keyvault.outputs.resourceId
+// output resourceId string = keyvault.outputs.resourceId

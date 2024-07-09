@@ -12,6 +12,9 @@
 
 az deployment group create --subscription Pay-As-You-Go --resource-group bicep-course --template-file main.bicep --mode complete --name deployment  --parameters @main-keyvault.parameters.json --what-if
 
+az deployment group create --subscription Pay-As-You-Go --resource-group bicep-course --template-file main.bicep --mode complete --name deployment  --parameters @main.parameters.json --what-if
+
+
 // preview changes 
 
 --what-if 
