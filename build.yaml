@@ -5,7 +5,9 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
-- resourceGroupName: bicep-course
+- name: resourceGroupName
+  type: string
+  default: bicep-course
 
 
 jobs:
