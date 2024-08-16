@@ -8,6 +8,9 @@ parameters:
 - name: resourceGroupName
   type: string
   default: bicep-course
+- name: env
+  type: string
+  default: dev 
 
 
 jobs:
@@ -19,7 +22,7 @@ jobs:
       
       inputs:
         deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'dev'
+        azureResourceManagerConnection: ${{ parameters.env }} 
         subscriptionId: 'aa07614d-2c55-4e18-84ca-108abaaa6fcd'
         action: 'Create Or Update Resource Group'
         resourceGroupName: ${{ parameters.resourceGroupName }} 
